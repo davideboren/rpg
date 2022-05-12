@@ -51,10 +51,24 @@ int main()
 				window.close();
 			}
 
-			if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape)){
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape){
 				window.close();
 			}
 		}
+
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
+			player.set_dest(0,-1,0);
+		}
+		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
+			player.set_dest(1,0,1);
+		}
+		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
+			player.set_dest(0,1,2);
+		}
+		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
+			player.set_dest(-1,0,3);
+		}
+
 
 		player.update();
 		

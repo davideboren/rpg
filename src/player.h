@@ -5,9 +5,7 @@ class Player : public sf::Sprite
 		Player();
 
 		int top, right, bottom, left;
-		void update();
 
-		void walk();
 		bool is_walking;
 		unsigned int frame_counter;
 		int anim_counter;
@@ -17,8 +15,15 @@ class Player : public sf::Sprite
 
 		int cur_tile_x, cur_tile_y;
 		int dest_tile_x, dest_tile_y;
+		sf::Vector2f dest_pos;
 
 		sf::IntRect walk_frames [4][4];
+
+		void update();
+
+		void walk();
+
+		void set_dest(int dx, int dy, int d);
 
 		void setTile(int x, int y);
 
