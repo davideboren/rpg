@@ -29,7 +29,7 @@ int main()
 	Player player;
 	player.setTexture(texture);
 	player.setTextureRect(sf::IntRect(0,0,16,16));
-	player.setPosition(32,32);
+	player.setTile(1,3);
 
 	const int level [] = {
 		9,10,10,10,9,
