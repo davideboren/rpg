@@ -29,13 +29,24 @@ int main()
 	Player player;
 	player.setTexture(texture);
 	player.setTextureRect(sf::IntRect(0,0,16,16));
-	player.setTile(1,3);
+	player.setTile(2,1);
 
 	const int level [] = {
-		9,10,10,10,9,
+		9, 10, 10, 10, 9,
 		0, 0, 0, 0, 0,
 		0, 0, 0, 0, 0,
 		0, 0, 0, 0, 0
+	};
+
+	//Collision map with padding on every side for OOB
+	//Should probably dynamically generate this in tilemap
+	const bool is_passable [6][7] = {
+		{ 0, 0, 0, 0, 0, 0, 0 },
+		{ 0, 0, 0, 0, 0, 0, 0 },
+		{ 0, 1, 1, 1, 1, 1, 0 },
+		{ 0, 1, 1, 1, 1, 1, 0 },
+		{ 0, 1, 1, 1, 1, 1, 0 },
+		{ 0, 0, 0, 0, 0, 0, 0 }
 	};
 
 	TileMap map;
@@ -57,16 +68,28 @@ int main()
 		}
 
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
-			player.set_dest(0,-1,0);
+			if(is_passable[player.cur_tile_y][player.cur_tile_x + 1])
+				player.set_dest(0,-1,0);
+			else
+				player.set_dest(0,0,0);
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
-			player.set_dest(1,0,1);
+			if(is_passable[player.cur_tile_y + 1][player.cur_tile_x + 2])
+				player.set_dest(1,0,1);
+			else
+				player.set_dest(0,0,1);
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
-			player.set_dest(0,1,2);
+			if(is_passable[player.cur_tile_y + 2][player.cur_tile_x + 1])
+				player.set_dest(0,1,2);
+			else
+				player.set_dest(0,0,2);
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
-			player.set_dest(-1,0,3);
+			if(is_passable[player.cur_tile_y + 1][player.cur_tile_x])
+				player.set_dest(-1,0,3);
+			else
+				player.set_dest(0,0,3);
 		}
 
 

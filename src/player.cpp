@@ -42,8 +42,8 @@ void Player::update(){
 
 	if(!is_walking){
 		setTextureRect(walk_frames[dir][0]);
-		anim_counter = 0;
 		frame_counter = 0;
+		anim_counter = 0;
 	}
 	walk();
 }
@@ -54,6 +54,7 @@ void Player::set_dest(int dx, int dy, int d){
 		dest_tile_x = cur_tile_x + dx;
 		dest_pos = sf::Vector2f(dest_tile_x * 16, dest_tile_y * 16);
 		is_walking = true;
+		frame_counter = 0;
 		dir = d;
 	}
 }
@@ -62,22 +63,20 @@ void Player::walk(){
 	if(is_walking){
 
 		setTextureRect(walk_frames[dir][anim_counter % 4]);
-		if(getPosition() != dest_pos){
+		if(frame_counter < 16){
 			move(walk_speed * (dest_tile_x - cur_tile_x), walk_speed * (dest_tile_y - cur_tile_y));
 		}
 		else {
+			frame_counter = 0;
 			is_walking = false;
 			cur_tile_x = dest_tile_x;
 			cur_tile_y = dest_tile_y;
 		}
 
-		if(frame_counter % 10 == 0){
+		if(frame_counter % 8 == 1){
 			anim_counter++;
-			frame_counter = 0;
 		}
-
-	frame_counter++;
-		
+		frame_counter++;
 	}
 }
 

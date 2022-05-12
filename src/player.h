@@ -8,7 +8,7 @@ class Player : public sf::Sprite
 
 		bool is_walking;
 		unsigned int frame_counter;
-		int anim_counter;
+		unsigned int anim_counter;
 		float walk_speed;
 
 		int dir;
