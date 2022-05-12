@@ -45,7 +45,9 @@ void Player::update(){
 		frame_counter = 0;
 		anim_counter = 0;
 	}
-	walk();
+	else{
+		walk();
+	}
 }
 
 void Player::set_dest(int dx, int dy, int d){
@@ -60,7 +62,6 @@ void Player::set_dest(int dx, int dy, int d){
 }
 
 void Player::walk(){
-	if(is_walking){
 
 		setTextureRect(walk_frames[dir][anim_counter % 4]);
 		if(frame_counter < 16){
@@ -77,7 +78,6 @@ void Player::walk(){
 			anim_counter++;
 		}
 		frame_counter++;
-	}
 }
 
 void Player::setTile(int x, int y){
