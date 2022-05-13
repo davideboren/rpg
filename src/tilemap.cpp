@@ -1,7 +1,7 @@
 //This is lifted from the SFML documentation
 #include "tilemap.h"
 
-bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height)
+bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, const bool* passable_tiles, unsigned int width, unsigned int height)
 {
 	// load the tileset texture
 	if (!m_tileset.loadFromFile(tileset))
@@ -10,6 +10,10 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int*
 	// resize the vertex array to fit the level size
 	m_vertices.setPrimitiveType(sf::Quads);
 	m_vertices.resize(width * height * 4);
+
+	// resize collision matrix and populate with zeroes
+	passable.resize(width + 2, std::vector<bool>(height + 2));
+	passable.assign(width + 2, std::vector<bool>(0,height + 2));
 
 	// populate the vertex array, with one quad per tile
 	for (unsigned int i = 0; i < width; ++i)
@@ -36,9 +40,16 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int*
 			quad[1].texCoords = sf::Vector2f((tu + 1) * tileSize.x, tv * tileSize.y);
 			quad[2].texCoords = sf::Vector2f((tu + 1) * tileSize.x, (tv + 1) * tileSize.y);
 			quad[3].texCoords = sf::Vector2f(tu * tileSize.x, (tv + 1) * tileSize.y);
+
+			//populate collision matrix, leaving padding zeroes for OOB
+			passable[i+1][j+1] = passable_tiles[tileNumber];
 		}
 
 	return true;
+}
+
+bool TileMap::is_passable(int x, int y){
+	return passable[x + 1][y + 1];
 }
 
 void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
