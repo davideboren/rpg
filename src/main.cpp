@@ -6,8 +6,8 @@
 int main()
 {
 
-	const int RENDER_WIDTH = 80;
-	const int RENDER_HEIGHT = 64;
+	const int RENDER_WIDTH = 160;
+	const int RENDER_HEIGHT = 144;
 
 	const int SCREEN_WIDTH = RENDER_WIDTH * 2;
 	const int SCREEN_HEIGHT = RENDER_HEIGHT * 2;
@@ -29,13 +29,18 @@ int main()
 	Player player;
 	player.setTexture(texture);
 	player.setTextureRect(sf::IntRect(0,0,16,16));
-	player.setTile(2,1);
+	player.setTile(5,4);
 
 	const int level [] = {
-		9, 10, 10, 10, 9,
-		0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0,
-		0, 0, 0, 0, 0
+		11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
+		11, 4, 9, 10, 10, 10, 10, 10, 9, 11,
+		11, 8, 0, 0, 0, 0, 0, 3, 3, 11,
+		11, 0, 0, 0, 0, 0, 0, 0, 3, 11,
+		11, 0, 0, 0, 0, 0, 0, 3, 0, 11,
+		11, 0, 0, 0, 0, 0, 0, 0, 0, 11,
+		11, 0, 0, 0, 0, 0, 0, 0, 0, 11,
+		11, 0, 0, 0, 6, 7, 0, 0, 0, 11,
+		11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
 	};
 
 	const bool passable_tiles[] = {
@@ -45,7 +50,7 @@ int main()
 	};
 
 	TileMap map;
-	if (!map.load("gfx/room.png", sf::Vector2u(16, 16), level, passable_tiles, 5, 4))
+	if (!map.load("gfx/room.png", sf::Vector2u(16, 16), level, passable_tiles, 10, 9))
     	return -1;
 
 	while (window.isOpen())
