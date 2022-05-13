@@ -64,10 +64,11 @@ void Player::set_dest(int dx, int dy, int d){
 void Player::walk(){
 
 		setTextureRect(walk_frames[dir][anim_counter % 4]);
-		if(frame_counter < 16){
+		if(frame_counter < 15){
 			move(walk_speed * (dest_tile_x - cur_tile_x), walk_speed * (dest_tile_y - cur_tile_y));
 		}
 		else {
+			move(walk_speed * (dest_tile_x - cur_tile_x), walk_speed * (dest_tile_y - cur_tile_y));
 			frame_counter = 0;
 			is_walking = false;
 			cur_tile_x = dest_tile_x;
