@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "player.cpp"
-#include "tilemap.cpp"
+#include "player.h"
+#include "tilemap.h"
 
 int main()
 {
@@ -21,7 +21,7 @@ int main()
 	window.setView(view);
 
 	sf::Texture texture;
-	if (!texture.loadFromFile("gfx/gold.png"))
+	if (!texture.loadFromFile("../gfx/gold.png"))
 	{
 		std::cout << "Problem loading texture";
 	}
@@ -50,7 +50,7 @@ int main()
 	};
 
 	TileMap map;
-	if (!map.load("gfx/room.png", sf::Vector2u(16, 16), level, passable_tiles, 10, 9))
+	if (!map.load("../gfx/room.png", sf::Vector2u(16, 16), level, passable_tiles, 10, 9))
     	return -1;
 
 	while (window.isOpen())

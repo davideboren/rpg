@@ -1,3 +1,5 @@
+#include <SFML/Graphics.hpp>
+
 class Player : public sf::Sprite
 {
 	public:
