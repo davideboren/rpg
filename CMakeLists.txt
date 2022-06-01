@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
-
 project(rpg)
 
-find_package(SFML 2.5
-  COMPONENTS
-    system window graphics REQUIRED)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+add_subdirectory(${CMAKE_SOURCE_DIR}/SFML)
 
 set(SOURCES src/main.cpp src/player.cpp src/tilemap.cpp)
 

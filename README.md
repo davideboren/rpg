@@ -5,3 +5,12 @@
 (Using Pokemon sprites for now as placeholders)
 
 General purpose top-down RPG overworld engine with grid-constrained movement style a la Pokemon.
+
+To build:
+
+```
+git clone --branch 2.6.x https://github.com/SFML/SFML.git
+mkdir build && cd build
+cmake ..
+make
+```
