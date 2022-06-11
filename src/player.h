@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
+#include "entity.h"
 
-class Player : public sf::Sprite
+class Player : public Entity
 {
 	public:
 

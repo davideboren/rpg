@@ -26,10 +26,13 @@ int main()
 		std::cout << "Problem loading texture";
 	}
 
+	std::vector<Entity*> entities;
+
 	Player player;
 	player.setTexture(texture);
 	player.setTextureRect(sf::IntRect(0,0,16,16));
 	player.setTile(5,4);
+	entities.push_back(&player);
 
 	const int level [] = {
 		11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
@@ -93,11 +96,14 @@ int main()
 		}
 
 
-		player.update();
-		
 		window.clear();
 		window.draw(map);
-		window.draw(player);
+
+		for(int i = 0; i < entities.size(); i++){
+			entities[i]->update();
+			window.draw(*entities[i]);
+		}
+
 		window.display();
 	}
 

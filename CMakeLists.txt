@@ -7,7 +7,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/SFML)
 
-set(SOURCES src/main.cpp src/player.cpp src/tilemap.cpp)
+set(SOURCES src/entity.h src/main.cpp src/player.cpp src/tilemap.cpp)
 
 add_executable(rpg ${SOURCES})
 
