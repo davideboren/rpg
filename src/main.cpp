@@ -3,6 +3,35 @@
 #include "player.h"
 #include "tilemap.h"
 
+void check_move_inputs(Player* player, TileMap* map){
+
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
+			if(map->is_passable(player->cur_tile_x,player->cur_tile_y - 1))
+				player->set_dest(0,-1,0);
+			else
+				player->set_dest(0,0,0);
+		}
+		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
+			if(map->is_passable(player->cur_tile_x + 1,player->cur_tile_y))
+				player->set_dest(1,0,1);
+			else
+				player->set_dest(0,0,1);
+		}
+		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
+			if(map->is_passable(player->cur_tile_x,player->cur_tile_y + 1))
+				player->set_dest(0,1,2);
+			else
+				player->set_dest(0,0,2);
+		}
+		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
+			if(map->is_passable(player->cur_tile_x - 1,player->cur_tile_y))
+				player->set_dest(-1,0,3);
+			else
+				player->set_dest(0,0,3);
+		}
+}
+
+
 int main()
 {
 
@@ -70,31 +99,7 @@ int main()
 			}
 		}
 
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
-			if(map.is_passable(player.cur_tile_x,player.cur_tile_y - 1))
-				player.set_dest(0,-1,0);
-			else
-				player.set_dest(0,0,0);
-		}
-		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
-			if(map.is_passable(player.cur_tile_x + 1,player.cur_tile_y))
-				player.set_dest(1,0,1);
-			else
-				player.set_dest(0,0,1);
-		}
-		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
-			if(map.is_passable(player.cur_tile_x,player.cur_tile_y + 1))
-				player.set_dest(0,1,2);
-			else
-				player.set_dest(0,0,2);
-		}
-		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
-			if(map.is_passable(player.cur_tile_x - 1,player.cur_tile_y))
-				player.set_dest(-1,0,3);
-			else
-				player.set_dest(0,0,3);
-		}
-
+		check_move_inputs(&player, &map);
 
 		window.clear();
 		window.draw(map);

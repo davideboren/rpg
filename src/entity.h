@@ -1,3 +1,6 @@
+#ifndef ENTITY
+#define ENTITY
+
 #include <SFML/Graphics.hpp>
 
 class Entity : public sf::Sprite
@@ -6,3 +9,5 @@ class Entity : public sf::Sprite
 		virtual ~Entity() {}
 		virtual void update() {}
 };
+
+#endif
