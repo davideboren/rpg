@@ -87,3 +87,25 @@ void Player::setTile(int x, int y){
 	cur_tile_x = x;
 	cur_tile_y = y;
 }
+
+std::pair<int,int> Player::get_facing_tile(){
+	if(dir == 0){
+		std::pair<int,int> output(cur_tile_x, cur_tile_y - 1);
+		return output;
+	}
+	else if(dir == 1){
+		std::pair<int,int> output(cur_tile_x + 1, cur_tile_y);
+		return output;
+	}
+	else if(dir == 2){
+		std::pair<int,int> output(cur_tile_x, cur_tile_y + 1);
+		return output;
+	}
+	else if(dir == 3){
+		std::pair<int,int> output(cur_tile_x - 1, cur_tile_y);
+		return output;
+	}
+
+	std::pair<int,int> output(cur_tile_x, cur_tile_y + 1);
+	return output;
+}

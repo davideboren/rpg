@@ -3,7 +3,7 @@
 #include "player.h"
 #include "tilemap.h"
 
-void check_move_inputs(Player* player, TileMap* map){
+void check_inputs(Player* player, TileMap* map){
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
 			if(map->is_passable(player->cur_tile_x,player->cur_tile_y - 1))
@@ -28,6 +28,9 @@ void check_move_inputs(Player* player, TileMap* map){
 				player->set_dest(-1,0,3);
 			else
 				player->set_dest(0,0,3);
+		}
+		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::E)){
+			//std::cout << player->get_facing_tile().first << "," <<player->get_facing_tile().second << std::endl;
 		}
 }
 
@@ -99,7 +102,7 @@ int main()
 			}
 		}
 
-		check_move_inputs(&player, &map);
+		check_inputs(&player, &map);
 
 		window.clear();
 		window.draw(map);

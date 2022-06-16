@@ -30,6 +30,8 @@ class Player : public Entity
 
 		void setTile(int x, int y);
 
+		std::pair<int,int> get_facing_tile();
+
 	private:
 
 };
