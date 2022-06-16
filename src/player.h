@@ -7,8 +7,6 @@ class Player : public Entity
 
 		Player();
 
-		int top, right, bottom, left;
-
 		bool is_walking;
 		unsigned int frame_counter;
 		unsigned int anim_counter;
