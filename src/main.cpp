@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "player.h"
+#include "npc.h"
 #include "tilemap.h"
 
 void check_inputs(Player* player, TileMap* map){
@@ -65,6 +66,10 @@ int main()
 	player.setTextureRect(sf::IntRect(0,0,16,16));
 	player.setTile(5,4);
 	entities.push_back(&player);
+
+	NPC slime("Glop.");
+	slime.setTile(8,4);
+	entities.push_back(&slime);
 
 	const int level [] = {
 		11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
