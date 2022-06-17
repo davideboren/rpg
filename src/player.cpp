@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "player.h"
 #include <math.h>
+#include <iostream>
 
 Player::Player() :
 
@@ -33,6 +34,15 @@ Player::Player() :
 	}
 
 {
+
+	if (!texture.loadFromFile("../gfx/gold.png"))
+    {
+        std::cout << "Problem loading texture";
+    }
+
+	setTexture(texture);
+	setTextureRect(walk_frames[0][0]);
+
 	is_walking = false;
 	anim_counter = 0;
 	walk_speed = 1;

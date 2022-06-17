@@ -53,24 +53,6 @@ int main()
 
 	window.setView(view);
 
-	sf::Texture texture;
-	if (!texture.loadFromFile("../gfx/gold.png"))
-	{
-		std::cout << "Problem loading texture";
-	}
-
-	std::vector<Entity*> entities;
-
-	Player player;
-	player.setTexture(texture);
-	player.setTextureRect(sf::IntRect(0,0,16,16));
-	player.setTile(5,4);
-	entities.push_back(&player);
-
-	NPC slime("Glop.");
-	slime.setTile(8,4);
-	entities.push_back(&slime);
-
 	const int level [] = {
 		11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
 		11, 4, 9, 10, 10, 10, 10, 10, 9, 11,
@@ -93,6 +75,15 @@ int main()
 	if (!map.load("../gfx/room.png", sf::Vector2u(16, 16), level, passable_tiles, 10, 9))
     	return -1;
 
+	std::vector<Entity*> entities;
+
+	Player player;
+	player.setTile(5,4);
+	entities.push_back(&player);
+
+	NPC slime("Glop.");
+	slime.setTile(8,4);
+	entities.push_back(&slime);
 	map.set_passable(8,4,false);
 
 	while (window.isOpen())
