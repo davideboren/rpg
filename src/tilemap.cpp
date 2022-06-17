@@ -3,9 +3,9 @@
 #include "tilemap.h"
 #include <iostream>
 
-//This is lifted from the SFML documentation
+//This is mostly lifted from the SFML documentation
 
-bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, const bool* passable_tiles, unsigned int width, unsigned int height)
+bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int* layout, const bool* passable_tiles, unsigned int width, unsigned int height)
 {
 	// load the tileset texture
 	if (!m_tileset.loadFromFile(tileset))
@@ -16,15 +16,14 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int*
 	m_vertices.resize(width * height * 2 * 3);
 
 	// resize collision matrix and populate with zeroes
-	passable.resize(width + 2, std::vector<bool>(height + 2));
-	passable.assign(width + 2, std::vector<bool>(0,height + 2));
+	tiles.resize(width + 2, std::vector<Tile>(height + 2));
 
 	// populate the vertex array, with two tris per tile
 	for (unsigned int i = 0; i < width; ++i)
 		for (unsigned int j = 0; j < height; ++j)
 		{
 			// get the current tile number
-			int tileNumber = tiles[i + j * width];
+			int tileNumber = layout[i + j * width];
 
 			// find its position in the tileset texture
 			int tu = tileNumber % (m_tileset.getSize().x / tileSize.x);
@@ -52,14 +51,18 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, const int*
 			tri_bot[2].texCoords = sf::Vector2f((tu + 1) * tileSize.x, (tv + 1) * tileSize.y);
 
 			//populate collision matrix, leaving padding zeroes for OOB
-			passable[i+1][j+1] = passable_tiles[tileNumber];
+			tiles[i+1][j+1].passable = passable_tiles[tileNumber];
 		}
 
 	return true;
 }
 
 bool TileMap::is_passable(int x, int y){
-	return passable[x + 1][y + 1];
+	return tiles[x+1][y+1].passable;
+}
+
+void TileMap::set_passable(int x, int y, bool pass){
+	tiles[x + 1][y + 1].passable = pass;
 }
 
 void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const

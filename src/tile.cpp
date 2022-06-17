@@ -5,3 +5,11 @@ Tile::Tile(){
 	interactable = false;
 	door = false;
 }
+
+Tile::Tile(Entity* e){
+	passable = false;
+	interactable = true;
+	door = false;
+
+	entity = e;
+}

@@ -93,6 +93,8 @@ int main()
 	if (!map.load("../gfx/room.png", sf::Vector2u(16, 16), level, passable_tiles, 10, 9))
     	return -1;
 
+	map.set_passable(8,4,false);
+
 	while (window.isOpen())
 	{
 		sf::Event event;
