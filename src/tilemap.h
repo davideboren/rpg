@@ -10,6 +10,10 @@ public:
 
 	void set_passable(int x, int y, bool pass);
 
+	bool is_interactable(int x, int y);
+
+	void register_entity(Entity* ent, int x, int y);
+
 private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

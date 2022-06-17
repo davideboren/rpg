@@ -65,6 +65,16 @@ void TileMap::set_passable(int x, int y, bool pass){
 	tiles[x + 1][y + 1].passable = pass;
 }
 
+bool TileMap::is_interactable(int x, int y){
+	return tiles[x + 1][y + 1].interactable;
+}
+
+void TileMap::register_entity(Entity* ent, int x, int y){
+	set_passable(x,y,false);
+	tiles[x + 1][y + 1].entity = ent;
+	tiles[x + 1][y + 1].interactable = true;
+}
+
 void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	// apply the transform

@@ -31,7 +31,11 @@ void check_inputs(Player* player, TileMap* map){
 				player->set_dest(0,0,3);
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::E)){
-			//std::cout << player->get_facing_tile().first << "," <<player->get_facing_tile().second << std::endl;
+			if(map->is_interactable(
+			player->get_facing_tile().first,
+			player->get_facing_tile().second)){
+				std::cout << "Success" << std::endl;
+			}
 		}
 }
 
@@ -84,7 +88,8 @@ int main()
 	NPC slime("Glop.");
 	slime.setTile(8,4);
 	entities.push_back(&slime);
-	map.set_passable(8,4,false);
+	//map.set_passable(8,4,false);
+	map.register_entity(&slime,8,4);
 
 	while (window.isOpen())
 	{
